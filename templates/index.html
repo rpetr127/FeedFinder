@@ -1,0 +1,48 @@
+
+<head>
+    <link rel="stylesheet" href="
+            https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="example">
+        <h1>
+            Search RSS-ATOM Feeds
+        </h1>
+        <p>RSSFeedSearch provides a simple API for searching websites for
+            <a href="https://en.wikipedia.org/wiki/RSS" > RSS</a> feeds.
+        </p>
+    </div>
+    <form class="example" method="get">
+        <div class="feed-search">
+            <input type="text" placeholder="search" name="url">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </div>
+
+    </form>
+    <div class="example">
+        <div style="margin-top: .5mm; margin-bottom: .5mm;">
+            Examples:
+            <a href="?url=https%3A%2F%2Farstechnica.com&amp;">arstechnica.com</a>,
+            <a href="?url=https%3A%2F%2Fjsonfeed.org&amp;">jsonfeed.org</a>,
+            <a href="?url=https%3A%2F%2Ftheverge.com&amp;">theVerge.com</a>,
+            <a href="?url=https%3A%2F%2Fen.wikipedia.org&amp;">en.wikipedia.org</a>
+        </div>
+        <h3 class="subheading">Query Parameters</h3>
+        <p>The RSSFeedSearch API accepts the following query parameters:</p>
+        <ul>
+            <li><b>url</b>: The <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URL</a> to search. Will return 400 Bad Request if not sent.</li>
+            <li><b>sp</b>: Speed of  scraping rss data from web sites. Than slower speed by that more a rss urls scrapied from site. Queried Params: slow - Slower speed, normal or empty - Normal speed, fast - faster speed.</li>
+            <li><b>result</b>: If query parameter result is equal to json, data showing of a json format, else = data showing in a web interface.</li>
+        </ul>
+        {{ if .FeedLinks }}
+        <p>Results:</p>
+        <ul style="margin-bottom: 0.2cm;">
+            {{ range .FeedLinks }}
+            <li > {{ . }} </li>
+            {{ end }}
+        {{ end }}
+        </ul>
+    </div>
+</body>

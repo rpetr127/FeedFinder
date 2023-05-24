@@ -1,0 +1,54 @@
+body {
+    font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+.example {
+    margin-inline: auto;
+    width: 80%;
+}
+
+form.example div {
+    height: 1.1cm; 
+    border: 1px solid grey; 
+    border-radius: 5px;
+}
+
+form.example div input[type=text] {
+    padding: inherit;
+    font-size: 17px;
+    border: none;
+    float: left;
+    width: 80%;
+    height: 100%;
+    background: #f1f1f1;
+}
+
+form.example div button {
+    padding: inherit;
+    float: left;
+    width: 20%;
+    height: 100%;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
