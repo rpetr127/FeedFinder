@@ -34,7 +34,7 @@ func main() {
 	// })
 	http.HandleFunc("/", handler)
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":4060", nil))
 }
 
 func handler (w http.ResponseWriter, r *http.Request) {
@@ -80,12 +80,9 @@ func getData(url, sp string, ch chan []string) {
 	c := colly.NewCollector(colly.Async())	
 	
 	var links []string
-	var linkVisited = false
-
-
 
 	c.OnHTML("head", func(h *colly.HTMLElement) {
-		if len(links) == 0 && !linkVisited {
+		if len(links) == 0 {
 			h.ForEach("link", func(i int, ch *colly.HTMLElement) {
 				link := ch
 				attr := link.Attr("type")
@@ -104,13 +101,14 @@ func getData(url, sp string, ch chan []string) {
 		c.OnHTML("a", func(h *colly.HTMLElement) {
 			attr := h.Attr("href")
 			link := FormatLink(url, attr)
+			fmt.Println(attr, link)
 			if !strings.Contains(attr, "cgi") {
 				if m, _ := regexp.MatchString(`\.rss$|\/feed$`, attr); m {
 					fmt.Println(attr)
 					links = append(links, link)
 				} else {
-					if len(links) == 0 {
-						linkVisited = true
+					if len(links) == 0 && link != "broken_link" {
+						fmt.Println(link)
 						h.Request.Visit(link)
 					}
 				}
