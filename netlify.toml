@@ -1,0 +1,8 @@
+[build]
+  command = "./build.sh"
+  functions = "functions"
+  publish = "public"
+
+[build.environment]
+  GO_IMPORT_PATH = "github.com/peter7rom-star/GoRssParser/tree/master"
+  GO111MODULE = "on"

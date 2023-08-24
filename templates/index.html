@@ -38,9 +38,14 @@
         </ul>
         {{ if .FeedLinks }}
         <p>Results:</p>
-        <ul style="margin-bottom: 0.2cm;">
+        <table id="feeds">
             {{ range .FeedLinks }}
-            <li > {{ . }} </li>
+            <tr>
+                <td>{{ . }}</td>
+                <td>
+                    <div class="button">Add</div>
+                </td>
+            </tr>
             {{ end }}
         {{ end }}
         </ul>

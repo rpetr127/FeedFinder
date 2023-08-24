@@ -52,3 +52,14 @@ form.example::after {
     clear: both;
     display: table;
 }
+
+#feeds {
+    margin-bottom: 0.2cm;
+    border-collapse: collapse;
+}
+
+.button {
+    background-color: blue;
+    border: 2px solid #fff;
+    border-radius: 10px;
+}
