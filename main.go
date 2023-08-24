@@ -34,7 +34,7 @@ func main() {
 	// })
 	http.HandleFunc("/", handler)
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
-	log.Fatal(http.ListenAndServe(":4060", nil))
+	log.Fatal(http.ListenAndServe(":5000", nil))
 }
 
 func handler (w http.ResponseWriter, r *http.Request) {
@@ -101,14 +101,12 @@ func getData(url, sp string, ch chan []string) {
 		c.OnHTML("a", func(h *colly.HTMLElement) {
 			attr := h.Attr("href")
 			link := FormatLink(url, attr)
-			fmt.Println(attr, link)
 			if !strings.Contains(attr, "cgi") {
 				if m, _ := regexp.MatchString(`\.rss$|\/feed$`, attr); m {
-					fmt.Println(attr)
+					fmt.Println(link)
 					links = append(links, link)
 				} else {
-					if len(links) == 0 && link != "broken_link" {
-						fmt.Println(link)
+					if len(links) == 0 {
 						h.Request.Visit(link)
 					}
 				}

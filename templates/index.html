@@ -3,7 +3,6 @@
     <link rel="stylesheet" href="
             https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/styles.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
     <div class="example">
@@ -41,13 +40,17 @@
         <table id="feeds">
             {{ range .FeedLinks }}
             <tr>
-                <td>{{ . }}</td>
+                <td class="item">{{ . }}</td>
                 <td>
-                    <div class="button">Add</div>
+                    <div id="item btn"><i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </div>
                 </td>
             </tr>
             {{ end }}
         {{ end }}
         </ul>
     </div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="/assets/item_event.js"></script>
+    <script src="/assets/main.js"></script>
 </body>

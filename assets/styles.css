@@ -58,8 +58,13 @@ form.example::after {
     border-collapse: collapse;
 }
 
-.button {
-    background-color: blue;
+.item {
+    margin-inline: 50%;
+}
+
+#btn {
+    color: blue;
+    background-color: white;
     border: 2px solid #fff;
     border-radius: 10px;
 }
