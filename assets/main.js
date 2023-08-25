@@ -1,4 +1,4 @@
-import feeds from './item_event';
+const feeds = require('/assets/item_event')
 
 (function () {
   const refList = document.querySelector('p').querySelectorAll('a');
