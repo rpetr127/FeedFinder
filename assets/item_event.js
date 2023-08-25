@@ -1,6 +1,6 @@
 const feeds = [];
 const item = document.getElementsByClassName('item')
-item[1].addEventListener("onclick", addItemToList)
+item[1].addEventListener("click", addItemToList)
 
 function addItemToList() {
   console.log(item[0].textContent)
