@@ -1,2 +1,2 @@
 # GoRssParser
-RSS Feed links parser writable on Go programming language.
+RSS Feed links finder writable on Go programming language.
