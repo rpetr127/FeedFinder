@@ -47,11 +47,12 @@ func handler (w http.ResponseWriter, r *http.Request) {
         return
     } else {
 		params := u.Query()
-		host_url := params.Get("url")
+		url := params.Get("url")
 		sp := params.Get("sp")
 		// result := params.Get("result")
-		if host_url != "" {
-			go getData(host_url,  sp, ch)
+		if url != "" {
+			url = FormatHostUrl(url)
+			go getData(url,  sp, ch)
 			// linksSet := mapset.NewSet[string]()
 			links := <-ch
 			fmt.Println(links)
@@ -123,6 +124,13 @@ func getData(url, sp string, ch chan []string) {
 	if len(links) > 0 {
 		ch <- links
 	}
+}
+
+func FormatHostUrl(url string) string {
+	if !strings.HasPrefix(url, "http") {
+		url = `http://` + url
+	}
+	return url
 }
 
 func FormatLink(url, link string) string {

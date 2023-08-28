@@ -1,7 +1,7 @@
 const feeds = require('/assets/item_event')
 
 (function () {
-  const refList = document.querySelector('p').querySelectorAll('a');
+  const refList = document.getElementById("example").querySelectorAll('a');
   const myInput = document.querySelector('input');
 
   for (let i = 0; i <= refList.length; i++) {
@@ -17,10 +17,10 @@ var WebApp = window.Telegram.WebApp;
 var MainButton = WebApp.MainButton;
 var BackButton = WebApp.BackButton;
 
-if !MainButton.isVisible {
+if (!MainButton.isVisible) {
   MainButton.show();
 }
-if !BackBtton.isVisible {
+if (!BackBtton.isVisible) {
   BackButton.show();
 }
 

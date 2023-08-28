@@ -6,7 +6,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div class="example">
+    <div class="main">
         <h1>
             Search RSS-ATOM Feeds
         </h1>
@@ -14,15 +14,15 @@
             <a href="https://en.wikipedia.org/wiki/RSS" > RSS</a> feeds.
         </p>
     </div>
-    <form class="example" method="get">
+    <form class="main" method="get">
         <div class="feed-search">
             <input type="text" placeholder="search" name="url">
             <button type="submit"><i class="fa fa-search"></i></button>
         </div>
 
     </form>
-    <div class="example">
-        <div style="margin-top: .5mm; margin-bottom: .5mm;">
+    <div class="main">
+        <div id="example">
             Examples:
             <a href="?url=https%3A%2F%2Farstechnica.com&amp;">arstechnica.com</a>,
             <a href="?url=https%3A%2F%2Fjsonfeed.org&amp;">jsonfeed.org</a>,
@@ -41,7 +41,7 @@
         <table id="feeds">
             {{ range .FeedLinks }}
             <tr>
-                <td class="item">{{ . }}</td>
+                <td>{{ . }}</td>
                 <td>
                     <div id="item btn"><i class="fa fa-plus-square" aria-hidden="true"></i>
                     </div>
