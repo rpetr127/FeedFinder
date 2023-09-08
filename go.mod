@@ -1,4 +1,4 @@
-module rss_feed_parser
+module github.com/rpetr127/RSSFeedFinder
 
 go 1.20
 
