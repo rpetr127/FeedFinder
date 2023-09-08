@@ -51,7 +51,7 @@ func handler (w http.ResponseWriter, r *http.Request) {
 		// result := params.Get("result")
 		if url != "" {
 			url = FormatHostUrl(url)
-			go getData(url,  sp, ch)
+			go ParseData(url,  sp, ch)
 			// linksSet := mapset.NewSet[string]()
 			links := <-ch
 			fmt.Println(links)
