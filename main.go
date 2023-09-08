@@ -15,7 +15,6 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-// var t string
 var tmpl = template.Must(template.ParseFiles("templates/index.html"))
 
 type PageData struct {
@@ -23,18 +22,18 @@ type PageData struct {
 }
 
 func main() {
-	// flag.StringVar(&url, "url", "http://jsonfeed.org", "Enter link for parsing rss feeds")
-	// flag.StringVar(&t, "t", "fast", "Enter a value for setting time of scraping feeds")
-	// flag.Parse()
-	// rss_links.Each(func(s string) bool {
-	// 	if s != "broken_link" {
-	// 		fmt.Println(s)
-	// 	}
-	// 	return false
-	// })
-	http.HandleFunc("/", handler)
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
-	log.Fatal(http.ListenAndServe(":5000", nil))
+	var url, sp string
+	flag.StringVar(&url, "l", "http://jsonfeed.org", "Enter link for parsing rss feeds")
+	flag.StringVar(&sp, "s", "fast", "Enter a value for setting speed of scraping feeds")
+	flag.Parse()
+	if url != "" {
+		ParseData(url, sp)
+	} else {
+		http.HandleFunc("/", handler)
+		http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+		log.Fatal(http.ListenAndServe(":5000", nil))
+	}
+	
 }
 
 func handler (w http.ResponseWriter, r *http.Request) {
@@ -77,7 +76,7 @@ func handler (w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getData(url, sp string, ch chan []string) {
+func ParseData(url, sp string, ch chan []string) {
 	c := colly.NewCollector(colly.Async())	
 	
 	var links []string
