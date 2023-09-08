@@ -23,17 +23,34 @@ type PageData struct {
 
 func main() {
 	var url, sp string
+	var ch = make(chan []string, 100)
 	flag.StringVar(&url, "l", "http://jsonfeed.org", "Enter link for parsing rss feeds")
 	flag.StringVar(&sp, "s", "fast", "Enter a value for setting speed of scraping feeds")
 	flag.Parse()
 	if url != "" {
-		ParseData(url, sp)
+		go GetLinks(url, sp, ch)
 	} else {
 		http.HandleFunc("/", handler)
 		http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 		log.Fatal(http.ListenAndServe(":5000", nil))
 	}
 	
+}
+
+func GetLinks(url, sp string ch chan []string) {
+	url = FormatHostUrl(url)
+	go ParseData(url,  sp, ch)
+	// linksSet := mapset.NewSet[string]()
+	links := <-ch
+	fmt.Println(links)
+	linksSet := mapset.NewSet[string]()
+	for _, link := range links {
+		if link != "broken_link" {
+			linksSet.Add(link)
+		}
+	}
+	links = linksSet.ToSlice()
+	slices.Sort(links)
 }
 
 func handler (w http.ResponseWriter, r *http.Request) {
@@ -50,20 +67,7 @@ func handler (w http.ResponseWriter, r *http.Request) {
 		sp := params.Get("sp")
 		// result := params.Get("result")
 		if url != "" {
-			url = FormatHostUrl(url)
-			go ParseData(url,  sp, ch)
-			// linksSet := mapset.NewSet[string]()
-			links := <-ch
-			fmt.Println(links)
-			linksSet := mapset.NewSet[string]()
-			for _, link := range links {
-				if link != "broken_link" {
-					linksSet.Add(link)
-				}
-			}
-			links = linksSet.ToSlice()
-			slices.Sort(links)
-
+			go GetLinks(url, sp, ch)
 			data = PageData {
 					FeedLinks: links,
 			}
