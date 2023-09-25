@@ -1,7 +1,7 @@
 package main
 
 import (
-	// "flag"
+	 "flag"
 	"fmt"
 	"html/template"
 	"log"
@@ -29,6 +29,10 @@ func main() {
 	flag.Parse()
 	if url != "" {
 		go GetLinks(url, sp, ch)
+		links := <-ch
+		for _, elem := range links {
+			fmt.Println(elem)
+		}
 	} else {
 		http.HandleFunc("/", handler)
 		http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
@@ -51,6 +55,7 @@ func GetLinks(url, sp string, ch chan []string) {
 	}
 	links = linksSet.ToSlice()
 	slices.Sort(links)
+	ch <- links
 }
 
 func handler (w http.ResponseWriter, r *http.Request) {
@@ -68,6 +73,7 @@ func handler (w http.ResponseWriter, r *http.Request) {
 		// result := params.Get("result")
 		if url != "" {
 			go GetLinks(url, sp, ch)
+			links := <-ch
 			data = PageData {
 					FeedLinks: links,
 			}
