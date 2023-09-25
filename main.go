@@ -37,7 +37,7 @@ func main() {
 	
 }
 
-func GetLinks(url, sp string ch chan []string) {
+func GetLinks(url, sp string, ch chan []string) {
 	url = FormatHostUrl(url)
 	go ParseData(url,  sp, ch)
 	// linksSet := mapset.NewSet[string]()
