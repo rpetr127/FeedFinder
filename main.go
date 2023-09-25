@@ -1,11 +1,7 @@
 package main
 
 import (
-<<<<<<< HEAD
-	 "flag"
-=======
 	"flag"
->>>>>>> a04f952f238f0a1b2025fb21612c59aa20ae1e4e
 	"fmt"
 	"html/template"
 	"log"
