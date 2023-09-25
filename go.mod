@@ -1,4 +1,4 @@
-module github.com/rpetr127/RSSFeedFinder
+module github.com/rpetr127/RSSFeedFinder v1
 
 go 1.20
 
